@@ -17,7 +17,7 @@ function Playlist(props) {
             <IconFullScreen size={50} color="red" />
             {
                 props.playlist.map((playitem) => {
-                    return <Media {...playitem} key={playitem.id} />
+                    return <Media {...playitem} key={playitem.id} handleClick={props.handleOpenModal} />
                 })
             }
         </div>
