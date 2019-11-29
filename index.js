@@ -9,4 +9,7 @@ const CONTAINER = document.getElementById('app');
 
 // ReactDOM.render(QUE-SE-RENDERIZA, DÓNDE-SE-RENDERIZA);
 const holaMundo = <h1>Hola Mundo Programación en ReactJS</h1>;
-render(<Media />, CONTAINER);
+render(
+    <Media title="¿Qué es responsive design?" author="Wilson Xicará" image="./images/covers/responsive.jpg" />,
+    CONTAINER
+);
