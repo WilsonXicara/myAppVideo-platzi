@@ -4,33 +4,10 @@ import PropTypes from 'prop-types';
 import './media.css';
 
 class Media extends Component {
-    // Modificando el estado de las propiedades
-    //
-    // == > ECMA Script 6
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         author: props.author
-    //     }
-    // }
-    //
-    // == > ECMA Script 7
     state = {
         author: 'Wilson Xicará',
     }
-    // Enlazando propiedades del DOM a la clase
-    //
-    // == > ECMA Script 6
-    // constructor(props) {
-    //     super(props);
-    //     this.handleClick = this.handleClick.bind(this);
-    // }
-    // handleClick(event) {
-    //     console.log(this.props.title);
-    // }
-    //
-    // == > ECMA Script 7
-    // Realiza el bindin de forma automática
+    // ECMA Script 7 realiza el bindin de forma automática
     handleClick = (event) => {
         console.log(this.props.image);
         this.setState({
@@ -42,9 +19,9 @@ class Media extends Component {
         return (
             <div className="Media" onClick={this.handleClick}>
                 <div className="Media-cover">
-                    <img className="Media-image" src={this.props.image} alt="" width={260} height={160}/>
+                    <img className="Media-image" src={this.props.cover} alt="" width={260} height={160}/>
                     <h3 className="Media-title">{this.props.title}</h3>
-                    <p className="Media-author">{this.state.author}</p>
+                    <p className="Media-author">{this.props.author}</p>
                 </div>
             </div>
         )
@@ -53,7 +30,7 @@ class Media extends Component {
 
 // Validando el tipo de propiedad
 Media.propTypes = {
-    image: PropTypes.string,
+    cover: PropTypes.string,
     title: PropTypes.string.isRequired,
     author: PropTypes.string,
     type: PropTypes.oneOf(['video', 'audio']),
