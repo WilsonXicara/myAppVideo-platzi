@@ -4,6 +4,20 @@ import PropTypes from 'prop-types';
 import './media.css';
 
 class Media extends Component {
+    // Modificando el estado de las propiedades
+    //
+    // == > ECMA Script 6
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         author: props.author
+    //     }
+    // }
+    //
+    // == > ECMA Script 7
+    state = {
+        author: 'Wilson Xicará',
+    }
     // Enlazando propiedades del DOM a la clase
     //
     // == > ECMA Script 6
@@ -19,6 +33,9 @@ class Media extends Component {
     // Realiza el bindin de forma automática
     handleClick = (event) => {
         console.log(this.props.image);
+        this.setState({
+            author: 'Jerson Xicará',
+        });
     }
     render() {
         // Similar al constructor
@@ -27,7 +44,7 @@ class Media extends Component {
                 <div className="Media-cover">
                     <img className="Media-image" src={this.props.image} alt="" width={260} height={160}/>
                     <h3 className="Media-title">{this.props.title}</h3>
-                    <p className="Media-author">{this.props.author}</p>
+                    <p className="Media-author">{this.state.author}</p>
                 </div>
             </div>
         )
