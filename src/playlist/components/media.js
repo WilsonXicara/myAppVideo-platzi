@@ -1,5 +1,6 @@
 // Esta importación es posible gracias a la habilidad de desestructuración de JavaScript
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './media.css';
 
 class Media extends Component {
@@ -15,6 +16,14 @@ class Media extends Component {
             </div>
         )
     }
+}
+
+// Validando el tipo de propiedad
+Media.propTypes = {
+    image: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string,
+    type: PropTypes.oneOf(['video', 'audio']),
 }
 
 export default Media;
