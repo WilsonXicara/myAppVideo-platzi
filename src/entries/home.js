@@ -5,7 +5,7 @@ import Home from '../pages/containers/home';
 // Data
 import data from '../assets/api.json';
 
-const CONTAINER = document.getElementById('app');
+const HOME_CONTAINER = document.getElementById('home-container');
 
 // ReactDOM.render(QUE-SE-RENDERIZA, DÓNDE-SE-RENDERIZA);
-render(<Home data={data} />, CONTAINER);
+render(<Home data={data} />, HOME_CONTAINER);
