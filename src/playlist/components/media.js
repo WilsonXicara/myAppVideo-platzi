@@ -1,9 +1,9 @@
 // Esta importación es posible gracias a la habilidad de desestructuración de JavaScript
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './media.css';
 
-class Media extends Component {
+class Media extends PureComponent {
     state = {
         author: 'Wilson Xicará',
     }
