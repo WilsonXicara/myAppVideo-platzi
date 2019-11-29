@@ -17,7 +17,7 @@ module.exports = (env) => {
   return {
 
     entry: {
-      'myVideoApp': path.resolve(__dirname, 'index.js'),
+      'home': path.resolve(__dirname, 'src/entries/home.js'),
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
