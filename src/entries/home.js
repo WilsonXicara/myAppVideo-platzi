@@ -8,4 +8,4 @@ import data from '../assets/api.json';
 const CONTAINER = document.getElementById('app');
 
 // ReactDOM.render(QUE-SE-RENDERIZA, DÓNDE-SE-RENDERIZA);
-render(<Home />, CONTAINER);
+render(<Home data={data} />, CONTAINER);

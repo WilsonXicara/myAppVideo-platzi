@@ -9,26 +9,15 @@ import IconFullScreen from '../../icons/components/icon-full-screen';
 import './playlist.css';
 
 function Playlist(props) {
-    console.log(props.data);
-    const categories = props.data.categories;
     return (
-        <div>
+        <div className="Playlist">
+            <IconPlay size={50} color="red" />
+            <IconPause size={50} color="red" />
+            <IconVolume size={50} color="red" />
+            <IconFullScreen size={50} color="red" />
             {
-                categories.map((category) => {
-                    const playlist = category.playlist;
-                    return (
-                        <div className="Playlist" key={category.id}>
-                            <IconPlay size={50} color="red" />
-                            <IconPause size={50} color="red" />
-                            <IconVolume size={50} color="red" />
-                            <IconFullScreen size={50} color="red" />
-                            {
-                                playlist.map((playitem) => {
-                                    return <Media {...playitem} key={playitem.id} />
-                                })
-                            }
-                        </div>
-                    )
+                props.playlist.map((playitem) => {
+                    return <Media {...playitem} key={playitem.id} />
                 })
             }
         </div>
