@@ -4,10 +4,26 @@ import PropTypes from 'prop-types';
 import './media.css';
 
 class Media extends Component {
+    // Enlazando propiedades del DOM a la clase
+    //
+    // == > ECMA Script 6
+    // constructor(props) {
+    //     super(props);
+    //     this.handleClick = this.handleClick.bind(this);
+    // }
+    // handleClick(event) {
+    //     console.log(this.props.title);
+    // }
+    //
+    // == > ECMA Script 7
+    // Realiza el bindin de forma automática
+    handleClick = (event) => {
+        console.log(this.props.image);
+    }
     render() {
         // Similar al constructor
         return (
-            <div className="Media">
+            <div className="Media" onClick={this.handleClick}>
                 <div className="Media-cover">
                     <img className="Media-image" src={this.props.image} alt="" width={260} height={160}/>
                     <h3 className="Media-title">{this.props.title}</h3>
