@@ -4,6 +4,22 @@ import { render } from 'react-dom'; // Esta importación es posible gracias a la
 import Home from '../pages/containers/home';
 // Data
 import data from '../assets/api.json';
+// Redux
+import { createStore } from 'redux';
+
+const initialState = {
+    data: {
+        ...data
+    }
+};
+
+const store = createStore(
+    (state) => state,       // Reducer
+    initialState,           // Estado inicial
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
+);
+
+console.log(store.getState());
 
 const HOME_CONTAINER = document.getElementById('home-container');
 
