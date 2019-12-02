@@ -7,6 +7,7 @@ import data from '../assets/api.json';
 // Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import reducer from '../reducers/data';
 
 const initialState = {
     data: {
@@ -15,7 +16,7 @@ const initialState = {
 };
 
 const store = createStore(
-    (state) => state,       // Reducer
+    reducer,                // Reducer
     initialState,           // Estado inicial
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
 );
