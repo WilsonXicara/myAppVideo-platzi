@@ -1,7 +1,6 @@
 import { createStore } from 'redux';
 
 const FORM_CONTAINER = document.getElementById('form');
-const CONTAINER_PLAYLIST = document.getElementById('playlist');
 // Escuchando el evento del Submit
 FORM_CONTAINER.addEventListener('submit', handleSubmit);
 
@@ -50,11 +49,23 @@ const STORE = createStore(
     // Según https://github.com/zalmoxisus/redux-devtools-extension#11-basic-store
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )
-const playlist = STORE.getState();
-playlist.forEach((item, index) => {
-    const template = document.createElement('p');
-    template.textContent = item.title;
-    CONTAINER_PLAYLIST.appendChild(template);
-});
+
+function render() {
+    const CONTAINER_PLAYLIST = document.getElementById('playlist');
+    CONTAINER_PLAYLIST.innerHTML = '';      // Para borrar su contenido previo a renderizar nuevamente
+    const playlist = STORE.getState();
+    playlist.forEach((item, index) => {
+        const template = document.createElement('p');
+        template.textContent = item.title;
+        CONTAINER_PLAYLIST.appendChild(template);
+    });
+}
+render();   // Para que se ejecute en la carga del Entry
+
+function handleChange() {
+    render();
+}
+
+STORE.subscribe(handleChange);
 
 console.log(STORE.getState());
