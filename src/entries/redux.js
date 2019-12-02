@@ -30,13 +30,22 @@ const initialState = [
     }
 ];
 
+const reducer = function(state, action) {
+    switch (action.type) {
+        case 'ADD_SONG':
+            return [...state, action.data];
+        default:
+            return state;
+    }
+}
+
 // const STORE = createStore(
 //     reducer,
 //     initialState,
 //     enhancer,
 // )
 const STORE = createStore(
-    (state) => state,
+    reducer,
     initialState,
     // Según https://github.com/zalmoxisus/redux-devtools-extension#11-basic-store
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
