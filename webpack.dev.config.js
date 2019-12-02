@@ -11,6 +11,8 @@ module.exports = {
   devServer: {
     port: 9000,
   },
+  // Esta configuración permite darle seguimiento detallado de en dónde surgen los errores
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {

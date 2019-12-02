@@ -5,6 +5,7 @@ import Categories from '../../categories/components/categories';
 import Related from '../components/related';
 import ModalContainer from '../../widgets/containers/modal-container';
 import Modal from '../../widgets/components/modal';
+import VideoPlayer from '../../player/containers/video-player';
 // Error handler
 import HandleError from '../../errors/containers/handle-error';
 
@@ -29,6 +30,7 @@ class Home extends Component {
             <HandleError>
                 <HomeLayout>
                     <Related />
+                    <VideoPlayer />
                     <Categories categories={this.props.data.categories} handleOpenModal={this.handleOpenModal} />
                     {
                         // Operador ternario, sin else
