@@ -1,5 +1,4 @@
-import React from 'react';
-import { render } from 'react-dom';
+import { createStore } from 'redux';
 
 const FORM_CONTAINER = document.getElementById('form');
 // Escuchando el evento del Submit
@@ -11,3 +10,27 @@ function handleSubmit(event) {
     const title = data.get('title');    // Obteniendo el contenido del formulario
     console.log('Title:', title);
 }
+
+const initialState = [
+    {
+        "title": "Title 1",
+    },
+    {
+        "title": "Title 2",
+    },
+    {
+        "title": "Title 3",
+    }
+];
+
+// const STORE = createStore(
+//     reducer,
+//     initialState,
+//     enhancer,
+// )
+const STORE = createStore(
+    (state) => state,
+    initialState,
+    // Según https://github.com/zalmoxisus/redux-devtools-extension#11-basic-store
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+)
