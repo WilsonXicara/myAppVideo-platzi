@@ -6,6 +6,7 @@ import Home from '../pages/containers/home';
 import data from '../assets/api.json';
 // Redux
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 const initialState = {
     data: {
@@ -24,4 +25,10 @@ console.log(store.getState());
 const HOME_CONTAINER = document.getElementById('home-container');
 
 // ReactDOM.render(QUE-SE-RENDERIZA, DÓNDE-SE-RENDERIZA);
-render(<Home data={data} />, HOME_CONTAINER);
+render(
+    // High order component. Heredan cosas a los componentes hijos
+    <Provider store={store}>
+        <Home />
+    </Provider>,
+    HOME_CONTAINER
+);
