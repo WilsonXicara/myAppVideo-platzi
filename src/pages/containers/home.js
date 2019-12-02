@@ -8,6 +8,8 @@ import Modal from '../../widgets/components/modal';
 import VideoPlayer from '../../player/containers/video-player';
 // Error handler
 import HandleError from '../../errors/containers/handle-error';
+// React Redux
+import { connect } from 'react-redux';
 
 class Home extends Component {
     state = {
@@ -31,7 +33,7 @@ class Home extends Component {
             <HandleError>
                 <HomeLayout>
                     <Related />
-                    <Categories categories={this.props.data.categories} handleOpenModal={this.handleOpenModal} />
+                    <Categories categories={this.props.categories} handleOpenModal={this.handleOpenModal} />
                     {
                         // Operador ternario, sin else
                         this.state.modalVisible && 
@@ -49,4 +51,11 @@ class Home extends Component {
     }
 }
 
-export default Home;
+function mapStateToProps(state, props) {
+    // Devolviendo nuevas propiedades para Home
+    return {
+        categories: state.data.categories
+    }
+}
+
+export default connect(mapStateToProps)(Home);
