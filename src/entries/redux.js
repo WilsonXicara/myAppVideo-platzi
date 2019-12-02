@@ -10,6 +10,12 @@ function handleSubmit(event) {
     const data = new FormData(FORM_CONTAINER);  // Guarda los datos del formulario
     const title = data.get('title');    // Obteniendo el contenido del formulario
     console.log('Title:', title);
+    STORE.dispatch({
+        type: 'ADD_SONG',
+        data: {
+            title,
+        }
+    });
 }
 
 const initialState = [
