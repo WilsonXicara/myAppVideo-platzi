@@ -3,18 +3,16 @@ import { render } from 'react-dom'; // Esta importación es posible gracias a la
 // Components
 import Home from '../pages/containers/home';
 // Data
-import data from '../assets/api.json';
-import normalizedData from '../schemas/index';
+import data from '../schemas/index';
 // Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from '../reducers/data';
 
-console.log('DATA:', normalizedData);
-
 const initialState = {
     data: {
-        ...data,
+        entities: data.entities,
+        categories: data.result.categories,
     },
     // Para que el reducer pueda agregar la búsqueda realizada
     search: [],
