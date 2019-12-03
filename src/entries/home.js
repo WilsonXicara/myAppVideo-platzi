@@ -4,10 +4,13 @@ import { render } from 'react-dom'; // Esta importación es posible gracias a la
 import Home from '../pages/containers/home';
 // Data
 import data from '../assets/api.json';
+import normalizedData from '../schemas/index';
 // Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from '../reducers/data';
+
+console.log('DATA:', normalizedData);
 
 const initialState = {
     data: {
