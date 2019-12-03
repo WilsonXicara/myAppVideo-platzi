@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'myVideoApp': path.resolve(__dirname, 'index.js'),
+    'home': path.resolve(__dirname, 'src/entries/home.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -11,6 +11,8 @@ module.exports = {
   devServer: {
     port: 9000,
   },
+  // Esta configuración permite darle seguimiento detallado de en dónde surgen los errores
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -21,6 +23,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            // 'es2015' es ECMAScript 6
+            // 'stage-2' permite utilizar las nuevas características
             presets: ['es2015', 'react', 'stage-2'],
           }
         },
