@@ -18,7 +18,7 @@ class VideoPlayer extends Component {
         pause: true,
         duration: 0,
         currentTime: 0,
-        loading: true
+        loading: false
     }
     togglePlay = (event) => {
         this.setState({
@@ -64,7 +64,7 @@ class VideoPlayer extends Component {
         if (!document.webkitIsFullScreen) {
             this.playerLayout.webkitRequestFullScreen();
         } else {
-            this.playerLayout.webkitExitFullscreen();
+            document.exitFullscreen();
         }
     }
     setRef = element => {
@@ -73,7 +73,7 @@ class VideoPlayer extends Component {
     render() {
         return (
             <VideoPlayerLayout setRef={this.setRef}>
-                <Title title="Esto es un video chido!"/>
+                <Title title={this.props.title} />
                 <VideoPlayerControls>
                     <PlayPause pause={this.state.pause}
                                handleClick={this.togglePlay} />
@@ -94,7 +94,7 @@ class VideoPlayer extends Component {
                        handleTimeUpdate={this.handleTimeUpdate}
                        handleSeeking={this.handleSeeking}
                        handleSeeked={this.handleSeeked}
-                       src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
+                       src={this.props.src} />
             </VideoPlayerLayout>
         )
     }
