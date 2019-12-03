@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // Component
 import Search from '../components/search';
+// Provider
+import { connect } from 'react-redux';
 
 class SearchContainer extends Component {
     state = {
@@ -9,13 +11,19 @@ class SearchContainer extends Component {
     handleSubmit = event => {
         event.preventDefault();
         console.log(this.input.value, 'submit');
+        this.props.dispatch({
+            type: 'SEARCH_VIDEO',
+            payload: {
+                query: this.input.value
+            }
+        })
     }
     setInputRef = element => {
         this.input = element;
     }
     handleInputChange = event => {
         this.setState({
-            value: event.target.value.toLowerCase().replace(' ', '-'),
+            value: event.target.value,
         });
     }
     render() {
@@ -30,4 +38,5 @@ class SearchContainer extends Component {
     }
 }
 
-export default SearchContainer;
+// Una de las funcionalidades del 'connect()' es asignarle a this.props la función 'dispatch()'
+export default connect()(SearchContainer);

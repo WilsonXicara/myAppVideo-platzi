@@ -33,7 +33,9 @@ class Home extends Component {
             <HandleError>
                 <HomeLayout>
                     <Related />
-                    <Categories categories={this.props.categories} handleOpenModal={this.handleOpenModal} />
+                    <Categories categories={this.props.categories}
+                                handleOpenModal={this.handleOpenModal}
+                                search={this.props.search} />
                     {
                         // Operador ternario, sin else
                         this.state.modalVisible && 
@@ -54,7 +56,8 @@ class Home extends Component {
 function mapStateToProps(state, props) {
     // Devolviendo nuevas propiedades para Home
     return {
-        categories: state.data.categories
+        categories: state.data.categories,
+        search: state.search,
     }
 }
 

@@ -11,8 +11,10 @@ import reducer from '../reducers/data';
 
 const initialState = {
     data: {
-        ...data
-    }
+        ...data,
+    },
+    // Para que el reducer pueda agregar la búsqueda realizada
+    search: [],
 };
 
 const store = createStore(
