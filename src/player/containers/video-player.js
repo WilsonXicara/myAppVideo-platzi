@@ -7,6 +7,7 @@ import PlayPause from '../components/play-pause';
 import Timer from '../components/timer';
 import VideoPlayerControls from '../components/video-player-controls';
 import ProgressBar from '../components/progress-bar';
+import Spinner from '../components/spinner';
 // Utilities
 import formattedTime from '../../utils/utilities';
 
@@ -14,7 +15,8 @@ class VideoPlayer extends Component {
     state = {
         pause: true,
         duration: 0,
-        currentTime: 0
+        currentTime: 0,
+        loading: true
     }
     togglePlay = (event) => {
         this.setState({
@@ -41,6 +43,18 @@ class VideoPlayer extends Component {
     handleProgressChange = event => {
         this.video.currentTime = event.target.value;
     }
+    handleSeeking = event => {
+        // Cuando el componente empieza a cargar
+        this.setState({
+            loading: true
+        })
+    }
+    handleSeeked = event => {
+        // Cuando el componente deja de cargar
+        this.setState({
+            loading: false
+        })
+    }
     render() {
         return (
             <VideoPlayerLayout>
@@ -55,12 +69,15 @@ class VideoPlayer extends Component {
                                   currentTime={this.state.currentTime}
                                   handleProgressChange={this.handleProgressChange} />
                 </VideoPlayerControls>
+                <Spinner isLoading={this.state.loading} />
                 
                 <Video autoplay={this.props.autoplay}
                        pause={this.state.pause}
                        handleLoadedMetadata={this.handleLoadedMetadata}
                        handleTimeUpdate={this.handleTimeUpdate}
-                       src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" />
+                       handleSeeking={this.handleSeeking}
+                       handleSeeked={this.handleSeeked}
+                       src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
             </VideoPlayerLayout>
         )
     }
