@@ -2,25 +2,15 @@ import React from 'react';
 import { render } from 'react-dom'; // Esta importación es posible gracias a la habilidad de desestructuración de JavaScript
 // Components
 import Home from '../pages/containers/home';
-// Data
-import data from '../schemas/index';
 // Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from '../reducers/data';
-
-const initialState = {
-    data: {
-        entities: data.entities,
-        categories: data.result.categories,
-    },
-    // Para que el reducer pueda agregar la búsqueda realizada
-    search: [],
-};
+// Reducers
+import reducer from '../reducers/index';
 
 const store = createStore(
-    reducer,                // Reducer
-    initialState,           // Estado inicial
+    reducer,    // Reducer
+    {},         // El estado inicial se inicializa en cada reducer
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
 );
 

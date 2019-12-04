@@ -62,7 +62,7 @@ function mapStateToProps(state, props) {
     // Devolviendo nuevas propiedades para Home
     return {
         categories,
-        search: state.search,
+        search: state.data.search,
     }
 }
 
