@@ -11,6 +11,8 @@ import { Map as map } from 'immutable';
 // Middlewares
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+// Async middleware
+import thunk from 'redux-thunk';
 
 // function logger({ getState, dispatch }) {
 //     return (next) => {
@@ -23,13 +25,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 //         }
 //     }
 // }
-const myLogger = ({ getState, dispatch }) => next => action => {
-    console.log('Envío de acción:', action);
-    console.log('Estado anterior:', getState().toJS());
-    const value = next(action);
-    console.log('Nuevo estado:', getState().toJS());
-    return value;
-}
+// const myLogger = ({ getState, dispatch }) => next => action => {
+//     console.log('Envío de acción:', action);
+//     console.log('Estado anterior:', getState().toJS());
+//     const value = next(action);
+//     console.log('Nuevo estado:', getState().toJS());
+//     return value;
+// }
 
 const store = createStore(
     reducer,    // Reducer
@@ -41,7 +43,7 @@ const store = createStore(
         applyMiddleware(
             // Se proporcionan los demás Middleware como parámetro
             logger,
-            myLogger
+            thunk
         )   // Convierte mi middleware en un enhancer
     )
 );
