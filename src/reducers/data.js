@@ -1,19 +1,14 @@
 // Data
 import normalizedData from '../schemas/index';
+import { fromJS } from 'immutable';
 
-const initialState = {
+const initialState = fromJS({
     entities: normalizedData.entities,
     categories: normalizedData.result.categories,
     // Para que el reducer pueda agregar la búsqueda realizada
     search: [],
-};
+});
 
-// El initialState se almacena en el Store de la siguiente forma:
-// store: {
-//     NOMBRE_FUNCION == data: {
-//         ...initialState
-//     }
-// }
 function data(state = initialState, action) {
     switch (action.type) {
         case 'SEARCH_VIDEO':

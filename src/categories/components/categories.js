@@ -12,13 +12,17 @@ function Categories(props) {
             <Search />
             {
                 props.search.map(item => {
-                    return <Media key={item.id} {...item} />
+                    // Ahora 'item' es un map, por lo que hay que llamar a 'toJS()' para volverlo un objeto
+                    return <Media key={item.get('id')}
+                                  {...item.toJS()} />
                 })
             }
             {
                 props.categories.map(category => {
                     return (
-                        <Category key={category.id} {...category} handleOpenModal={props.handleOpenModal} />
+                        <Category key={category.get('id')}
+                                  {...category.toJS()}
+                                  handleOpenModal={props.handleOpenModal} />
                     )
                 })
             }

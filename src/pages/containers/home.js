@@ -56,13 +56,13 @@ class Home extends Component {
 function mapStateToProps(state, props) {
     console.log('STATE:', state);
     // Obteniendo las categorías de los datos normalizados
-    const categories = state.data.categories.map(categoryId => {
-        return state.data.entities.categories[categoryId];
+    const categories = state.get('data').get('categories').map(categoryId => {
+        return state.get('data').get('entities').get('categories').get(categoryId);
     });
     // Devolviendo nuevas propiedades para Home
     return {
         categories,
-        search: state.data.search,
+        search: state.get('data').get('search'),
     }
 }
 
