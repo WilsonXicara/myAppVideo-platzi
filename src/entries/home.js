@@ -3,17 +3,37 @@ import { render } from 'react-dom'; // Esta importación es posible gracias a la
 // Components
 import Home from '../pages/containers/home';
 // Redux
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 // Reducers
 import reducer from '../reducers/index';
 import { Map as map } from 'immutable';
 
+// function logger({ getState, dispatch }) {
+//     return (next) => {
+//         return (action) => {
+//             console.log('Envío de acción:', action);
+//             console.log('Estado anterior:', getState().toJS());
+//             const value = next(action);
+//             console.log('Nuevo estado:', getState().toJS());
+//             return value;
+//         }
+//     }
+// }
+const logger = ({ getState, dispatch }) => next => action => {
+    console.log('Envío de acción:', action);
+    console.log('Estado anterior:', getState().toJS());
+    const value = next(action);
+    console.log('Nuevo estado:', getState().toJS());
+    return value;
+}
+
 const store = createStore(
     reducer,    // Reducer
     // Al manejar 'immutable' el estado se maneja como un mapa propio de 'immutable'
     map(),      // El estado inicial se inicializa en cada reducer
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
+    applyMiddleware(logger)   // Convierte mi middleware en un enhancer
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
 );
 
 console.log(store.getState());
