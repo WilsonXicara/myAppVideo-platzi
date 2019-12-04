@@ -1,6 +1,7 @@
 // Data
 import normalizedData from '../schemas/index';
 import { fromJS } from 'immutable';
+import { SEARCH_ENTITIES } from '../action-types/index';
 
 const initialState = fromJS({
     entities: normalizedData.entities,
@@ -11,15 +12,7 @@ const initialState = fromJS({
 
 function data(state = initialState, action) {
     switch (action.type) {
-        case 'SEARCH_ENTITIES':
-            // const query = action.payload.query.toLowerCase();
-
-            // const results = Object.values(state.entities.media).filter(media => media.author.toLowerCase().includes(query));
-            // console.log('Resultados:', results)
-            // return {
-            //     ...state,
-            //     search: results,
-            // };
+        case SEARCH_ENTITIES:
             return state.set('search', action.payload.query);
         default:
             return state;
