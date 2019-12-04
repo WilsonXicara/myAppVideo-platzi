@@ -11,6 +11,10 @@ function Categories(props) {
         <div className="Categories">
             <Search />
             {
+                props.isLoading &&
+                <h3>Buscando tus videos favoritos...</h3>
+            }
+            {
                 props.search.map(item => {
                     // Ahora 'item' es un map, por lo que hay que llamar a 'toJS()' para volverlo un objeto
                     return <Media key={item.get('id')}
