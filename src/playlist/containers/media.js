@@ -4,12 +4,13 @@ import Media from '../components/media';
 // 
 import { connect } from 'react-redux';
 // Actions creator
-import { openModal } from '../../actions/index';
+import * as actions from '../../actions/index';
+import { bindActionCreators } from 'redux';
 
 class MediaContainer extends Component {
     openModal = idMedia => {
         // De esta forma se hace el bind de this a la función
-        this.props.dispatch(openModal(idMedia));
+        this.props.actions.openModal(idMedia);
     }
     render() {
         return <Media {...this.props.data.toJS()}
@@ -18,10 +19,16 @@ class MediaContainer extends Component {
 }
 
 function mapStateToProps(state, props) {
+    // Aquí se hace la asignación del '.dispatch()' a 'props'
     return {
         data: state.get('data').get('entities').get('media').get(props.id)
     }
 }
 
-// Aquí se hace la asignación del '.dispatch()' a 'props'
-export default connect(mapStateToProps)(MediaContainer);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MediaContainer);

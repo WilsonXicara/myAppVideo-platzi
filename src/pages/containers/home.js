@@ -13,14 +13,15 @@ import { connect } from 'react-redux';
 // Immutable
 import { List as list } from 'immutable';
 // Actions creator
-import { openModal, closeModal } from '../../actions/index';
+import * as actions from '../../actions/index';
+import { bindActionCreators } from 'redux';
 
 class Home extends Component {
     handleOpenModal = (idMedia) => {
-        this.props.dispatch(openModal(idMedia));
+        this.props.actions.openModal(idMedia);
     }
     handleCloseModal = (event) => {
-        this.props.dispatch(closeModal());
+        this.props.actions.closeModal();
     }
     render() {
         return (
@@ -67,4 +68,10 @@ function mapStateToProps(state, props) {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
