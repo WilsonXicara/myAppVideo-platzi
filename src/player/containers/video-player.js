@@ -12,6 +12,8 @@ import Volume from '../components/volume';
 import FullScreen from '../components/full-screen';
 // Utilities
 import formattedTime from '../../utils/utilities';
+// React Redux
+import { connect } from 'react-redux';
 
 class VideoPlayer extends Component {
     state = {
@@ -73,7 +75,7 @@ class VideoPlayer extends Component {
     render() {
         return (
             <VideoPlayerLayout setRef={this.setRef}>
-                <Title title={this.props.title} />
+                <Title title={this.props.media.get('title')} />
                 <VideoPlayerControls>
                     <PlayPause pause={this.state.pause}
                                handleClick={this.togglePlay} />
@@ -94,10 +96,16 @@ class VideoPlayer extends Component {
                        handleTimeUpdate={this.handleTimeUpdate}
                        handleSeeking={this.handleSeeking}
                        handleSeeked={this.handleSeeked}
-                       src={this.props.src} />
+                       src={this.props.media.get('src')} />
             </VideoPlayerLayout>
         )
     }
 }
 
-export default VideoPlayer;
+function mapStateToProps(state, props) {
+    return {
+        media: state.get('data').get('entities').get('media').get(props.mediaId)
+    }
+}
+
+export default connect(mapStateToProps)(VideoPlayer);
