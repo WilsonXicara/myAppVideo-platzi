@@ -10,6 +10,8 @@ import VideoPlayer from '../../player/containers/video-player';
 import HandleError from '../../errors/containers/handle-error';
 // React Redux
 import { connect } from 'react-redux';
+// Immutable
+import { List as list } from 'immutable';
 
 class Home extends Component {
     state = {
@@ -59,10 +61,16 @@ function mapStateToProps(state, props) {
     const categories = state.get('data').get('categories').map(categoryId => {
         return state.get('data').get('entities').get('categories').get(categoryId);
     });
+    let searchResults = list();
+    const textSearch = state.get('data').get('search').toLowerCase();
+    if (textSearch) {
+        const mediaList = state.get('data').get('entities').get('media');
+        searchResults = mediaList.filter(itemMap => itemMap.get('author').toLowerCase().includes(textSearch)).toList();
+    }
     // Devolviendo nuevas propiedades para Home
     return {
         categories,
-        search: state.get('data').get('search'),
+        search: searchResults
     }
 }
 
