@@ -2,25 +2,50 @@ import React from 'react';
 import { render } from 'react-dom'; // Esta importación es posible gracias a la habilidad de desestructuración de JavaScript
 // Components
 import Home from '../pages/containers/home';
-// Data
-import data from '../assets/api.json';
 // Redux
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from '../reducers/data';
+// Reducers
+import reducer from '../reducers/index';
+import { Map as map } from 'immutable';
+// Middlewares
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
+// Async middleware
+import thunk from 'redux-thunk';
 
-const initialState = {
-    data: {
-        ...data,
-    },
-    // Para que el reducer pueda agregar la búsqueda realizada
-    search: [],
-};
+// function logger({ getState, dispatch }) {
+//     return (next) => {
+//         return (action) => {
+//             console.log('Envío de acción:', action);
+//             console.log('Estado anterior:', getState().toJS());
+//             const value = next(action);
+//             console.log('Nuevo estado:', getState().toJS());
+//             return value;
+//         }
+//     }
+// }
+// const myLogger = ({ getState, dispatch }) => next => action => {
+//     console.log('Envío de acción:', action);
+//     console.log('Estado anterior:', getState().toJS());
+//     const value = next(action);
+//     console.log('Nuevo estado:', getState().toJS());
+//     return value;
+// }
 
 const store = createStore(
-    reducer,                // Reducer
-    initialState,           // Estado inicial
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
+    reducer,    // Reducer
+    // Al manejar 'immutable' el estado se maneja como un mapa propio de 'immutable'
+    map(),      // El estado inicial se inicializa en cada reducer
+    composeWithDevTools(
+        // Esta función aplica el middleware de las herramientas de desarrollo
+        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
+        applyMiddleware(
+            // Se proporcionan los demás Middleware como parámetro
+            logger,
+            thunk
+        )   // Convierte mi middleware en un enhancer
+    )
 );
 
 console.log(store.getState());
