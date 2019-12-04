@@ -8,6 +8,9 @@ import { Provider } from 'react-redux';
 // Reducers
 import reducer from '../reducers/index';
 import { Map as map } from 'immutable';
+// Middlewares
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // function logger({ getState, dispatch }) {
 //     return (next) => {
@@ -20,7 +23,7 @@ import { Map as map } from 'immutable';
 //         }
 //     }
 // }
-const logger = ({ getState, dispatch }) => next => action => {
+const myLogger = ({ getState, dispatch }) => next => action => {
     console.log('Envío de acción:', action);
     console.log('Estado anterior:', getState().toJS());
     const value = next(action);
@@ -32,8 +35,15 @@ const store = createStore(
     reducer,    // Reducer
     // Al manejar 'immutable' el estado se maneja como un mapa propio de 'immutable'
     map(),      // El estado inicial se inicializa en cada reducer
-    applyMiddleware(logger)   // Convierte mi middleware en un enhancer
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
+    composeWithDevTools(
+        // Esta función aplica el middleware de las herramientas de desarrollo
+        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // Enhancer
+        applyMiddleware(
+            // Se proporcionan los demás Middleware como parámetro
+            logger,
+            myLogger
+        )   // Convierte mi middleware en un enhancer
+    )
 );
 
 console.log(store.getState());
