@@ -12,20 +12,15 @@ import HandleError from '../../errors/containers/handle-error';
 import { connect } from 'react-redux';
 // Immutable
 import { List as list } from 'immutable';
+// Actions creator
+import { openModal, closeModal } from '../../actions/index';
 
 class Home extends Component {
     handleOpenModal = (idMedia) => {
-        this.props.dispatch({
-            type: 'OPEN_MODAL',
-            payload: {
-                mediaId: idMedia
-            }
-        });
+        this.props.dispatch(openModal(idMedia));
     }
     handleCloseModal = (event) => {
-        this.props.dispatch({
-            type: 'CLOSE_MODAL'
-        });
+        this.props.dispatch(closeModal());
     }
     render() {
         return (

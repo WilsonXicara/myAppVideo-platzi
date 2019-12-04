@@ -3,16 +3,13 @@ import React, { Component } from 'react';
 import Media from '../components/media';
 // 
 import { connect } from 'react-redux';
+// Actions creator
+import { openModal } from '../../actions/index';
 
 class MediaContainer extends Component {
     openModal = idMedia => {
         // De esta forma se hace el bind de this a la función
-        this.props.dispatch({
-            type: 'OPEN_MODAL',
-            payload: {
-                mediaId: idMedia
-            }
-        })
+        this.props.dispatch(openModal(idMedia));
     }
     render() {
         return <Media {...this.props.data.toJS()}
